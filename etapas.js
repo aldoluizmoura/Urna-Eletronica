@@ -1,21 +1,21 @@
 let etapas = [{
         titulo: 'VEREADOR',
         numeros: 5,
-        cadidatos: [{
-                numero: 38111,
+        candidatos: [{
+                numero: '38111',
                 name: 'George Harrison',
                 partido: 'ATMP',
-                fots: [{
+                fotos: [{
                     url: 'GeorgeHarrison.jpg',
                     legenda: 'Vereador',
                     small: false
                 }]
             },
             {
-                numero: 77222,
+                numero: '77222',
                 name: 'Paul McCartney',
                 partido: 'RAM',
-                fots: [{
+                fotos: [{
                     url: 'PaulMccartney.jpg',
                     legenda: 'Vereador',
                     small: false
@@ -27,7 +27,7 @@ let etapas = [{
         titulo: 'PREFEITO',
         numeros: 2,
         candidatos: [{
-                numero: 99,
+                numero: '99',
                 name: 'George Harrison',
                 partido: 'ATMP',
                 Vice: 'Ringo Starr',
@@ -43,7 +43,7 @@ let etapas = [{
                 ]
             },
             {
-                numero: 84,
+                numero: '84',
                 name: 'Paul McCartney',
                 partido: 'RAM',
                 Vice: 'John Lennon',

@@ -4,14 +4,18 @@ let descricao = document.querySelector('.d-1-4');
 let aviso = document.querySelector('.d-2');
 let lateral = document.querySelector('.d-1-direta')
 let numeros = document.querySelector('.d-1-3')
-let numero = '';
 
+let numero = '';
 let etapaAtual = 0;
+let votoBranco = true;
+
 
 function comecarEtapa() {
     let etapa = etapas[etapaAtual]
 
     let numeroHtml = '';
+    numero = '';
+    votoBranco = false;
 
     for (let i = 0; i < etapa.numeros - 1; i++) {
         if (i === 0) {
@@ -29,8 +33,33 @@ function comecarEtapa() {
 }
 
 function atualizaInterface() {
+    let etapa = etapas[etapaAtual]
+    let candidato = etapa.candidatos.filter((item) => {
+        if (item.numero === numero) {
+            return true;
+        } else {
+            return false;
+        }
+    });
 
+    if (candidato.length > 0) {
+        candidato = candidato[0];
+        seuVotoPara.style.display = 'block';
+        aviso.style.display = 'block'
+        descricao.innerHTML = `Nome: ${candidato.name}<br/>Partido: ${candidato.partido}`;
 
+        let fotosHtml = '';
+        for (let i in candidato.fotos) {
+            fotosHtml += `<div class="imagemCandidato"><img src="./imagens/${candidato.fotos[i].url}" alt="" />${candidato.fotos[i].legenda}</div>`
+        }
+        lateral.innerHTML = fotosHtml;
+    } else {
+        seuVotoPara.style.display = 'block';
+        aviso.style.display = 'block'
+        descricao.innerHTML = '<div class="aviso--grande pisca">VOTO NULO</div>'
+    }
+
+    console.log("candidato", candidato)
 }
 
 function clicou(n) {
@@ -49,14 +78,42 @@ function clicou(n) {
 }
 
 function branco() {
+    numero = '';
+    votoBranco = true;
+    seuVotoPara.style.display = 'block';
+    aviso.style.display = 'block'
+    numeros.innerHTML = '';
+    lateral.innerHTML = '';
+    descricao.innerHTML = `<div class="aviso--grande pisca">VOTO EM BRANCO</div>`
 
 }
 
 function corrige() {
-
+    comecarEtapa();
 }
 
 function confirma() {
+    let etapa = etapas[etapaAtual]
+    let votoConfirmado = false;
+    if (votoBranco === true) {
+        votoConfirmado = true;
+        descricao.innerHTML = `<div class="aviso--grande pisca">VOTO CONFIRMADO!</div>`
+    } else if (numero.length === etapa.numeros) {
+        votoConfirmado = true;
+        descricao.innerHTML = `<div class="aviso--grande pisca">VOTO CONFIRMADO!</div>`
+    }
+
+    if (votoConfirmado) {
+        etapaAtual++;
+
+        if (etapas[etapaAtual] !== undefined) {
+            comecarEtapa();
+        } else {
+            descricao.innerHTML = `<div class="aviso--grande pisca">FIM!</div>`
+        }
+    }
+
+
 
 }
 
