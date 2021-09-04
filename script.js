@@ -8,6 +8,7 @@ let numeros = document.querySelector('.d-1-3')
 let numero = '';
 let etapaAtual = 0;
 let votoBranco = true;
+let votos = [];
 
 
 function comecarEtapa() {
@@ -50,7 +51,12 @@ function atualizaInterface() {
 
         let fotosHtml = '';
         for (let i in candidato.fotos) {
-            fotosHtml += `<div class="imagemCandidato"><img src="./imagens/${candidato.fotos[i].url}" alt="" />${candidato.fotos[i].legenda}</div>`
+            if (candidato.fotos[i].small) {
+                fotosHtml += `<div class="imagemCandidato small"><img src="./imagens/${candidato.fotos[i].url}" alt="" />${candidato.fotos[i].legenda}</div>`
+            } else {
+                fotosHtml += `<div class="imagemCandidato"><img src="./imagens/${candidato.fotos[i].url}" alt="" />${candidato.fotos[i].legenda}</div>`
+            }
+
         }
         lateral.innerHTML = fotosHtml;
     } else {
@@ -97,9 +103,17 @@ function confirma() {
     let votoConfirmado = false;
     if (votoBranco === true) {
         votoConfirmado = true;
+        votos.push({
+            etapa: etapas[etapaAtual].titulo,
+            voto: 'branco'
+        });
         descricao.innerHTML = `<div class="aviso--grande pisca">VOTO CONFIRMADO!</div>`
     } else if (numero.length === etapa.numeros) {
         votoConfirmado = true;
+        votos.push({
+            etapa: etapas[etapaAtual].titulo,
+            voto: numero
+        });
         descricao.innerHTML = `<div class="aviso--grande pisca">VOTO CONFIRMADO!</div>`
     }
 
@@ -109,12 +123,10 @@ function confirma() {
         if (etapas[etapaAtual] !== undefined) {
             comecarEtapa();
         } else {
-            descricao.innerHTML = `<div class="aviso--grande pisca">FIM!</div>`
+            document.querySelector('.tela').innerHTML = `<div class="aviso--gigante pisca">FIM</div>`
+            console.log(votos)
         }
     }
-
-
-
 }
 
 comecarEtapa();

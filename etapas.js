@@ -34,11 +34,11 @@ let etapas = [{
                 fotos: [{
                         url: 'GeorgeHarrison.jpg',
                         legenda: 'Prefeito'
-
                     },
                     {
                         url: 'ringo.jpg',
-                        legenda: 'Vice-Prefeito'
+                        legenda: 'Vice-Prefeito',
+                        small: true
                     }
                 ]
             },
@@ -50,7 +50,6 @@ let etapas = [{
                 fotos: [{
                         url: 'PaulMccartney.jpg',
                         legenda: 'Prefeito',
-                        small: true
                     },
                     {
                         url: 'john.jpg',
